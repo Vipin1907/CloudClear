@@ -1,17 +1,24 @@
+from dummy_model import dummy_predict
+
+
 def load_scene(path: str):
-    pass
+    print(f"Loading scene: {path}")
+    return path
 
 
 def call_model(scene):
-    pass
+    return dummy_predict(scene)
 
 
 def save_output(result, out_path: str):
-    pass
+    print(f"Output saved to: {out_path}")
 
 
 def main():
-    print("Pipeline Started")
+    scene = load_scene("sample_scene.tif")
+    result = call_model(scene)
+    save_output(result, "output.tif")
+    print("Pipeline Completed Successfully!")
 
 
 if __name__ == "__main__":
