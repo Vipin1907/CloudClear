@@ -1,8 +1,14 @@
+import os
 from pipeline.dummy_model import dummy_predict
 
 
 def load_scene(scene_path):
-    if not scene_path.endswith(".tif"):
+    # Check if file exists
+    if not os.path.exists(scene_path):
+        raise FileNotFoundError(f"Error: File '{scene_path}' not found.")
+
+    # Check if it is a .tif file
+    if not scene_path.lower().endswith(".tif"):
         raise ValueError("Error: Input file must be a .tif file.")
 
     print(f"Loading scene: {scene_path}")
@@ -19,7 +25,7 @@ def save_output(result, out_path):
 
 
 def main():
-    scene = load_scene("sample_scene.tif")
+    scene = load_scene("pipeline/sample_scene.tif")
     result = call_model(scene)
     save_output(result, "output.tif")
     print("Pipeline Completed Successfully!")
